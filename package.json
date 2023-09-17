@@ -1,0 +1,30 @@
+{
+  "name": "ts-setup",
+  "version": "1.0.0",
+  "description": "A package that generates configuration files for Node.js typescript projects with options.",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/bin/cli.js",
+    "dev": "nodemon src/bin/cli"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bin": "./dist/bin/index.js",
+  "dependencies": {
+    "@types/inquirer": "^9.0.3",
+    "child_process": "^1.0.2",
+    "dotenv": "^16.3.1",
+    "inquirer": "^9.2.10"
+  },
+  "devDependencies": {
+    "@types/node": "^20.3.1",
+    "env-cmd": "^10.1.0",
+    "nodemon": "^2.0.22",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.1.3"
+  }
+}
