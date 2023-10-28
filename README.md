@@ -7,7 +7,7 @@
 ### You can generate a template by running:
 
 ```bash
-npx ts-setup init
+npx node-ts-setup init
 ```
 
 ## Authors
