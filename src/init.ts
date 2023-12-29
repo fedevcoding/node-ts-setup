@@ -39,7 +39,7 @@ export default async function init() {
       distFolder,
       useAliases,
       usePrisma,
-      useExpress
+      useExpress,
     );
     const indexFile = generateIndex(useExpress, useAliases, usePrisma);
     const utils = generateUtils();

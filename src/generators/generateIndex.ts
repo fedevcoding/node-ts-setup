@@ -1,10 +1,20 @@
-export default function generateIndex(useExpress: boolean, useAliases: boolean, usePrisma: boolean) {
+export default function generateIndex(
+  useExpress: boolean,
+  useAliases: boolean,
+  usePrisma: boolean,
+) {
   const index = useExpress
     ? `${useAliases && 'require("module-alias/register")'}
 
 import dotenv from "dotenv";
 dotenv.config();
-${usePrisma ? `import { connectDb } from "${useAliases ? "@/config/db" : "./config/db"}";` : ""}
+${
+  usePrisma
+    ? `import { connectDb } from "${
+        useAliases ? "@/config/db" : "./config/db"
+      }";`
+    : ""
+}
 import express from "express";
 import cors from "cors";
 
@@ -23,7 +33,13 @@ app.listen(port, async () => {
     : `${useAliases && 'require("module-alias/register")'}
 
 import dotenv from "dotenv";
-${usePrisma ? `\nimport { connectDb } from "${useAliases ? "@/config/db" : "./config/db"}";` : ""}
+${
+  usePrisma
+    ? `\nimport { connectDb } from "${
+        useAliases ? "@/config/db" : "./config/db"
+      }";`
+    : ""
+}
 dotenv.config();`;
 
   return index;

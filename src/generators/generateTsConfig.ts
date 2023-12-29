@@ -1,4 +1,7 @@
-export default function generateTsConfig(distName: string, useAliases: boolean): string {
+export default function generateTsConfig(
+  distName: string,
+  useAliases: boolean,
+): string {
   const tsconfig = {
     compilerOptions: {
       target: "ES2022",
