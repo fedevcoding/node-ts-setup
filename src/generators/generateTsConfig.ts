@@ -1,6 +1,6 @@
 export default function generateTsConfig(
   distName: string,
-  useAliases: boolean,
+  useAliases: boolean
 ): string {
   const tsconfig = {
     compilerOptions: {
@@ -24,6 +24,7 @@ export default function generateTsConfig(
       noUnusedLocals: false,
       emitDecoratorMetadata: true,
       experimentalDecorators: true,
+      noUncheckedIndexedAccess: true,
     },
     ...(useAliases
       ? {

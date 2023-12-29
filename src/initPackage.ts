@@ -11,21 +11,15 @@ import generatePackage from "./generators/generatePackage.js";
 import generateIndex from "./generators/generateIndex.js";
 import generateUtils from "./generators/generateUtils.js";
 import generateGitignore from "./generators/generateGitignore.js";
-import generatePrettier from "./generators/generatePrettier.js";
 import generateConfigDb from "./generators/generateDbConfig.js";
+import generateConstants from "./generators/generateConstants.js";
 
-export default async function initPackage() {
+export default async function initProject() {
   try {
     const answers = await inquirer.prompt(initQuestions);
 
-    const {
-      distFolder,
-      packageName,
-      useAliases,
-      useExpress,
-      usePrisma,
-      usePrittier,
-    } = answers as initQuestionsReturnType;
+    const { distFolder, packageName, useAliases, useExpress, usePrisma } =
+      answers as initQuestionsReturnType;
 
     let database: string | undefined;
     if (usePrisma) {
@@ -43,23 +37,24 @@ export default async function initPackage() {
     );
     const indexFile = generateIndex(useExpress, useAliases, usePrisma);
     const utils = generateUtils();
+    const constants = useExpress ? generateConstants(useAliases) : "";
     const gitignore = generateGitignore(distFolder);
-
-    const prittier = generatePrettier();
 
     fs.mkdirSync("src");
     fs.mkdirSync("src/utils");
     fs.writeFileSync("src/utils/index.ts", utils);
+    fs.mkdirSync("src/constants");
+    fs.writeFileSync("src/constants/index.ts", constants);
     fs.mkdirSync("src/config");
     fs.writeFileSync("src/index.ts", indexFile);
     fs.writeFileSync("tsconfig.json", typescriptConfig);
     fs.writeFileSync("package.json", packageJson);
-    fs.writeFileSync(".env", "NODE_ENV=production");
+    fs.writeFileSync("README.md", "");
+    fs.writeFileSync(
+      ".env",
+      `NODE_ENV=production${useExpress ? "\nPORT=3000" : ""}`
+    );
     fs.writeFileSync(".gitignore", gitignore);
-
-    if (usePrittier) {
-      fs.writeFileSync(".prettierrc.json", prittier);
-    }
 
     console.log("Installing dependencies...");
     execSync("npm i");
