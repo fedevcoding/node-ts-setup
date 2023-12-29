@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A package that generates configuration files for Node.js typescript projects with options.",
   "bin": "./dist/cli.js",
   "type": "module",
@@ -21,6 +21,7 @@
     "inquirer": "^9.2.10"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.27.1",
     "@types/inquirer": "^9.0.7",
     "@types/node": "^20.10.5",
     "@typescript-eslint/eslint-plugin": "^6.16.0",
