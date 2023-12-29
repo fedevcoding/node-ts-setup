@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A package that generates configuration files for Node.js typescript projects with options.",
   "bin": "./dist/cli.js",
   "type": "module",
