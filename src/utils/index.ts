@@ -1,3 +1,13 @@
+export const initTypeQuestion = [
+  {
+    type: "list",
+    name: "type",
+    message: "What do you want to create?",
+    choices: ["project", "package"],
+    default: "project",
+  },
+];
+
 export const initQuestions = [
   {
     type: "input",

@@ -14,7 +14,7 @@ import generateGitignore from "./generators/generateGitignore.js";
 import generatePrettier from "./generators/generatePrettier.js";
 import generateConfigDb from "./generators/generateDbConfig.js";
 
-export default async function init() {
+export default async function initPackage() {
   try {
     const answers = await inquirer.prompt(initQuestions);
 
@@ -39,7 +39,7 @@ export default async function init() {
       distFolder,
       useAliases,
       usePrisma,
-      useExpress,
+      useExpress
     );
     const indexFile = generateIndex(useExpress, useAliases, usePrisma);
     const utils = generateUtils();
