@@ -3,7 +3,7 @@ export default function generatePackage(
   distFolder: string,
   useAliases: boolean,
   usePrisma: boolean,
-  useExpress: boolean
+  useExpress: boolean,
 ) {
   const dependencies = [
     usePrisma && { "@prisma/client": "^5.0.0" },

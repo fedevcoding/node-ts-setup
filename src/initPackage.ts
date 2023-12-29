@@ -33,7 +33,7 @@ export default async function initProject() {
       distFolder,
       useAliases,
       usePrisma,
-      useExpress
+      useExpress,
     );
     const indexFile = generateIndex(useExpress, useAliases, usePrisma);
     const utils = generateUtils();
@@ -52,7 +52,7 @@ export default async function initProject() {
     fs.writeFileSync("README.md", "");
     fs.writeFileSync(
       ".env",
-      `NODE_ENV=production${useExpress ? "\nPORT=3000" : ""}`
+      `NODE_ENV=production${useExpress ? "\nPORT=3000" : ""}`,
     );
     fs.writeFileSync(".gitignore", gitignore);
 

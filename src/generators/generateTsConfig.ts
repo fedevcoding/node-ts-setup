@@ -1,6 +1,6 @@
 export default function generateTsConfig(
   distName: string,
-  useAliases: boolean
+  useAliases: boolean,
 ): string {
   const tsconfig = {
     compilerOptions: {
