@@ -1,6 +1,6 @@
 export default function generateConstants(useAliases: boolean) {
   return `import { getEnv } from "${
-    useAliases ? "@/utils/getEnv" : "../utils/index"
+    useAliases ? "@/utils/index" : "../utils/index"
   }";
 export const PORT = parseInt(getEnv("PORT"));`;
 }
