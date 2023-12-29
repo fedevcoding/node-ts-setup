@@ -37,10 +37,19 @@ export const initQuestions = [
   },
 ];
 
-export const databases = {
-  type: "list",
-  name: "database",
-  message: "What database do you want to use?",
-  choices: ["postgresql", "mysql", "sqlite", "sqlserver", "mongodb ", "cockroachdb"],
-  default: "postgresql",
-};
+export const databases = [
+  {
+    type: "list",
+    name: "database",
+    message: "What database do you want to use?",
+    choices: [
+      "postgresql",
+      "mysql",
+      "sqlite",
+      "sqlserver",
+      "mongodb ",
+      "cockroachdb",
+    ],
+    default: "postgresql",
+  },
+];

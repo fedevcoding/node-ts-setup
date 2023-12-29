@@ -1,17 +1,15 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "ES6",
-    "rootDir": "./src",
-    "baseUrl": "./",
-    "outDir": "./dist",
+    "module": "Node16",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
-    "skipLibCheck": true,
+    "declaration": true,
     "noUnusedLocals": false,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "noUncheckedIndexedAccess": true,
+    "noEmit": true
   }
 }

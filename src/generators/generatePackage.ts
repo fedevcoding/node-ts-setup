@@ -7,7 +7,11 @@ export default function generatePackage(
 ) {
   const dependencies = [
     usePrisma && { "@prisma/client": "^5.0.0" },
-    useExpress && { cors: "^2.8.5", express: "^4.18.2", "@types/express": "^4.17.17" },
+    useExpress && {
+      cors: "^2.8.5",
+      express: "^4.18.2",
+      "@types/express": "^4.17.17",
+    },
     useAliases && { "module-alias": "^2.2.3" },
     { dotenv: "^16.3.1" },
   ].filter(Boolean);
@@ -20,14 +24,14 @@ export default function generatePackage(
   ].filter(Boolean);
 
   const packageJson: {
-    [key: string]: any;
+    [key: string]: unknown;
   } = {
     name: packageName.replaceAll(" ", "-").toLowerCase(),
     version: "1.0.0",
     description: "",
     main: `${distFolder}/index.js`,
     scripts: {
-      dev: `tsc-watch --onSuccess \"npm start\"`,
+      dev: `tsc-watch --onSuccess "npm start"`,
       start: `node ${distFolder}/index.js`,
       build: "tsc",
     },

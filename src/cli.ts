@@ -10,5 +10,5 @@ async function main() {
   if (!functionName) {
     console.log("Please provide a function name");
     return;
-  } else if (functionName === "init") init();
+  } else if (functionName === "init-project") init();
 }

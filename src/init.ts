@@ -4,29 +4,43 @@ import fs from "fs";
 import inquirer from "inquirer";
 import { execSync } from "child_process";
 
-import { initQuestionsReturnType } from "../types.js";
-import { databases, initQuestions } from "../utils/index.js";
-import generateTsConfig from "../generators/generateTsConfig.js";
-import generatePackage from "../generators/generatePackage.js";
-import generateIndex from "../generators/generateIndex.js";
-import generateUtils from "../generators/generateUtils.js";
-import generateGitignore from "../generators/generateGitignore.js";
-import generatePrettier from "../generators/generatePrettier.js";
-import generateConfigDb from "../generators/generateDbConfig.js";
+import { initQuestionsReturnType } from "./types/index.js";
+import { databases, initQuestions } from "./utils/index.js";
+import generateTsConfig from "./generators/generateTsConfig.js";
+import generatePackage from "./generators/generatePackage.js";
+import generateIndex from "./generators/generateIndex.js";
+import generateUtils from "./generators/generateUtils.js";
+import generateGitignore from "./generators/generateGitignore.js";
+import generatePrettier from "./generators/generatePrettier.js";
+import generateConfigDb from "./generators/generateDbConfig.js";
 
 export default async function init() {
   try {
     const answers = await inquirer.prompt(initQuestions);
 
-    const { distFolder, packageName, useAliases, useExpress, usePrisma, usePrittier }: initQuestionsReturnType =
-      answers as any;
+    const {
+      distFolder,
+      packageName,
+      useAliases,
+      useExpress,
+      usePrisma,
+      usePrittier,
+    } = answers as initQuestionsReturnType;
 
+    let database: string | undefined;
     if (usePrisma) {
-      var { database } = await inquirer.prompt(databases);
+      const res = await inquirer.prompt(databases);
+      database = res.database;
     }
 
     const typescriptConfig = generateTsConfig(distFolder, useAliases);
-    const packageJson = generatePackage(packageName, distFolder, useAliases, usePrisma, useExpress);
+    const packageJson = generatePackage(
+      packageName,
+      distFolder,
+      useAliases,
+      usePrisma,
+      useExpress
+    );
     const indexFile = generateIndex(useExpress, useAliases, usePrisma);
     const utils = generateUtils();
     const gitignore = generateGitignore(distFolder);
@@ -58,8 +72,10 @@ export default async function init() {
     }
 
     console.log("Project generated successfully!");
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.log("An error ocurred while generating the project");
-    console.log(error?.message || error);
+    if (error instanceof Error) {
+      console.log(error.message);
+    }
   }
 }

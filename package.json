@@ -1,30 +1,32 @@
 {
   "name": "node-ts-setup",
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "1.0.0",
   "description": "A package that generates configuration files for Node.js typescript projects with options.",
-  "main": "dist/index.js",
+  "bin": "./dist/cli.js",
   "type": "module",
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/bin/cli.js",
-    "dev": "nodemon src/bin/cli"
+    "build": "tsup src/cli.ts --format cjs,esm",
+    "release": "npm run build && changeset publish",
+    "lint": "tsc && eslint . --ext .ts",
+    "pretty": "prettier --write ."
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bin": "./dist/bin/index.js",
+  "author": "@fedevcoding",
+  "license": "MIT",
   "dependencies": {
-    "@types/inquirer": "^9.0.3",
     "child_process": "^1.0.2",
-    "dotenv": "^16.3.1",
     "inquirer": "^9.2.10"
   },
   "devDependencies": {
-    "@types/node": "^20.3.1",
-    "env-cmd": "^10.1.0",
-    "nodemon": "^2.0.22",
-    "ts-node": "^10.9.1",
-    "tsconfig-paths": "^4.2.0",
+    "@types/inquirer": "^9.0.7",
+    "@types/node": "^20.10.5",
+    "@typescript-eslint/eslint-plugin": "^6.16.0",
+    "@typescript-eslint/parser": "^6.16.0",
+    "eslint": "^8.56.0",
+    "tsup": "^8.0.1",
     "typescript": "^5.1.3"
   }
 }
