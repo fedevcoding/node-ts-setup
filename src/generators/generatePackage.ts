@@ -20,7 +20,12 @@ export default function generatePackage(
     useExpress && { "@types/cors": "^2.8.12" },
     usePrisma && { prisma: "^5.0.0" },
     useAliases && { "tsconfig-paths": "^4.2.0" },
-    { "tsc-watch": "^6.0.4", "@types/node": "^20.3.1", typescript: "^5.1.3" },
+    {
+      "tsc-watch": "^6.0.4",
+      "@types/node": "^20.3.1",
+      typescript: "^5.1.3",
+      prettier: "^2.8.7",
+    },
   ].filter(Boolean);
 
   const packageJson: {
@@ -34,6 +39,7 @@ export default function generatePackage(
       dev: `tsc-watch --onSuccess "npm start"`,
       start: `node ${distFolder}/index.js`,
       build: "tsc",
+      pretty: "prettier --write src",
     },
     keywords: [],
     author: "",

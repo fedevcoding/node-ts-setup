@@ -24,6 +24,7 @@ export default function generateTsConfig(
       noUnusedLocals: false,
       emitDecoratorMetadata: true,
       experimentalDecorators: true,
+      noUncheckedIndexedAccess: true,
     },
     ...(useAliases
       ? {

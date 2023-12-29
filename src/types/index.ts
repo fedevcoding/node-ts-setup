@@ -4,5 +4,5 @@ export type initQuestionsReturnType = {
   useAliases: boolean;
   useExpress: boolean;
   usePrisma: boolean;
-  usePrittier: boolean;
+  useEslint: boolean;
 };

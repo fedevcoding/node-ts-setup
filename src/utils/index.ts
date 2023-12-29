@@ -23,8 +23,8 @@ export const initQuestions = [
   },
   {
     type: "confirm",
-    name: "usePrittier",
-    message: "Do you want a default prittier config?",
+    name: "useEslint",
+    message: "Do you want to use eslint?",
     default: true,
   },
   {
@@ -37,7 +37,7 @@ export const initQuestions = [
     type: "confirm",
     name: "useExpress",
     message: "Do you want to create a basic express app?",
-    default: true,
+    default: false,
   },
   {
     type: "confirm",
