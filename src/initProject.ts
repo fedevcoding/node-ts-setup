@@ -13,13 +13,20 @@ import generateUtils from "./generators/generateUtils.js";
 import generateGitignore from "./generators/generateGitignore.js";
 import generateConfigDb from "./generators/generateDbConfig.js";
 import generateConstants from "./generators/generateConstants.js";
+import generateEslintConfig from "./generators/generateEslintConfig.js";
 
 export default async function initProject() {
   try {
     const answers = await inquirer.prompt(initQuestions);
 
-    const { distFolder, packageName, useAliases, useExpress, usePrisma } =
-      answers as initQuestionsReturnType;
+    const {
+      distFolder,
+      packageName,
+      useAliases,
+      useExpress,
+      usePrisma,
+      useEslint,
+    } = answers as initQuestionsReturnType;
 
     let database: string | undefined;
     if (usePrisma) {
@@ -33,23 +40,31 @@ export default async function initProject() {
       distFolder,
       useAliases,
       usePrisma,
-      useExpress
+      useExpress,
+      useEslint
     );
     const indexFile = generateIndex(useExpress, useAliases, usePrisma);
     const utils = generateUtils();
     const constants = useExpress ? generateConstants(useAliases) : "";
     const gitignore = generateGitignore(distFolder);
 
+    if (useEslint) {
+      const eslintConfig = generateEslintConfig();
+      fs.writeFileSync(".eslintrc", eslintConfig);
+      fs.writeFileSync(".eslintignore", "/node_modules/\n/dist");
+    }
+
     fs.mkdirSync("src");
     fs.mkdirSync("src/utils");
     fs.writeFileSync("src/utils/index.ts", utils);
+
     fs.mkdirSync("src/constants");
     fs.writeFileSync("src/constants/index.ts", constants);
     fs.mkdirSync("src/config");
     fs.writeFileSync("src/index.ts", indexFile);
     fs.writeFileSync("tsconfig.json", typescriptConfig);
     fs.writeFileSync("package.json", packageJson);
-    fs.writeFileSync("README.md", "");
+    fs.writeFileSync("README.md", `# ${packageName}`);
     fs.writeFileSync(
       ".env",
       `NODE_ENV=production${useExpress ? "\nPORT=3000" : ""}`
@@ -58,6 +73,7 @@ export default async function initProject() {
 
     console.log("Installing dependencies...");
     execSync("npm i");
+    execSync("npm run pretty");
 
     if (usePrisma) {
       console.log("Installing Prisma...");
@@ -66,7 +82,10 @@ export default async function initProject() {
       execSync(`npx prisma init --datasource-provider ${database}`);
     }
 
-    console.log("Project generated successfully!");
+    console.log("\n💫 Project generated successfully 💫");
+    console.log(
+      "If you like the tool consider adding a star on github: https://github.com/fedevcoding/node-ts-setup"
+    );
   } catch (error: unknown) {
     console.log("An error ocurred while generating the project");
     if (error instanceof Error) {
