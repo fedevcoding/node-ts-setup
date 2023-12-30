@@ -1,6 +1,6 @@
 export default function generateGitignore(distFolder: string) {
-  return `node_modules
+  return `/node_modules
+/${distFolder}
 .env
-.env.dev
-${distFolder}`;
+.env.dev`;
 }
