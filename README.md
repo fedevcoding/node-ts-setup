@@ -1,8 +1,8 @@
 # NodeJS Typescript setup
 
-<br>
-
 ### This library is used to automatically generate typescript nodejs template projects.
+
+🩷 (please consider adding a ⭐ on github) 🩷
 
 ### You can generate a template by running:
 
